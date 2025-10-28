@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+
+    // les controllers challenge 1
     public function index(){
       return ('Je suis le contrôleur TestController');
     }
@@ -24,4 +26,6 @@ class TestController extends Controller
     public function showArticle($id){
       return ('Vous consultez l’article  ' . $id);
     }
+
+    // les controllers challenge 2
 }

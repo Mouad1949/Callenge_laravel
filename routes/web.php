@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// les routes challenge 1
 
 Route::get('/', function (){
   return ('Bonjour Laravel');
@@ -41,7 +43,9 @@ Route::get('greet/{prenom}' , [TestController::class , 'greet']);
 Route::get('profile/{id}/{age}' , [TestController::class , 'profile']);
 Route::get('article/{id}' , [TestController::class , 'showArticle']);
 
+// les routes challenge 2
 
+// Route::resource('tests',TestController::class);
 
-
+// Route::get('posts/create',[PostController::class,'create']);
 
