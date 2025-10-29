@@ -1,7 +1,9 @@
 <?php
 
 
+use App\Http\Controllers\Challenge_4\FormContrller;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,4 +50,7 @@ Route::get('article/{id}' , [TestController::class , 'showArticle']);
 // Route::resource('tests',TestController::class);
 
 // Route::get('posts/create',[PostController::class,'create']);
+// route Challenge 4
+Route::get('register',[FormContrller::class , 'showForm']);
+Route::post('register/submit',[FormContrller::class , 'handleSubmit'])->name('hundleSubmit.register');
 
