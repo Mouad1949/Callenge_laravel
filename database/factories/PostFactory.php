@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'auther'=>fake()->name(),
             'desc'=>fake()->sentence(5,10),
             'status'=>fake()->word(),
-            'user_id'=> 1
+            'user_id'=> 2
         ];
     }
 }

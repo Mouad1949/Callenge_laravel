@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\challenge6\Booking;
+use App\Models\challenge6\Service;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +21,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([PostTableSeeder::class]);
+        // $this->call([PostTableSeeder::class]);
+        // $this->call([BookingSeeder::class]);
+        Service::factory()->count(7)->create()->each(function($service){
+          Booking::factory(3)->create(['service_id'=>$service->id]);
+        });
     }
 }

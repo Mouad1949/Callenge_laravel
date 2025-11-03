@@ -6,6 +6,8 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -72,6 +74,47 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function register(Request $request){
+      $user=User::create([
+        "name"=>$request->name,
+        "email"=>$request->email,
+        "role"=>$request->role,
+        "password"=>Hash::make($request->password)
+      ]);
+      return response()->json([
+        "messsage"=>"register user successfuly",
+        "user"=>$user
+      ]);
+    }
+
+    public function login(Request $request){
+      $request->validate([
+        "email"=>"required|string|email",
+        "password"=>"required|string"
+      ]);
+      if(!Auth::attempt($request->only('email','password')))
+        return response()->json([
+        "messsage"=>"invalid login",
+      ]);
+
+      $user = User::where('email',$request->email)->firstOrFail();
+      $token = $user->createToken('auth_Token')->plainTextToken;
+      return response()->json([
+        "messsage"=>"Login successfuly",
+        "User"=>$user,
+        'Token'=>$token
+      ]);
+    }
+
+    public function logout(Request $request){
+      $request->user()->tokens()->delete();
+      
+      return response()->json([
+        "messsage"=>"logout successfuly"]);
+    }
+
 
 
 

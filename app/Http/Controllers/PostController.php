@@ -6,12 +6,17 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function index($id){
-      $post = Post::find($id);
+    // public function index($id){
+    //   $post = Post::find($id);
       
+    //   return $post;
+    // }
+    public function index(){
+      $post = Post::all();
       return $post;
     }
 
@@ -52,14 +57,16 @@ class PostController extends Controller
     // }
 
     public function show($id){
+      
       $post = Post::find($id);
-      if($post){
-        return $post;
-      }
-      return "Not found";
+      return $post;
+    
     }
 
-    public function update(Request $request , $id){
+    public function update(Request $request, Post $post , $id){
+      if(!Gate::allows('update_post',$post)){
+        abort(403);
+      }
       $post = Post::find($id);
       $post->title = $request->title;
       $post->auther = $request->auther;
